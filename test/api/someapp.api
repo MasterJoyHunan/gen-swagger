@@ -1,0 +1,17 @@
+syntax = "v1"
+
+info(
+	title: "some app"
+	version: "1.0.1"
+	localApi: "www.baidu.com"
+	devApi: "www.baidu2.com"
+	prodApi: "www.baidu3.com"
+)
+
+import (
+	"v1/user.api"
+	"v1/book.api"
+	"v1/swagger.api"
+	"v1/cart.api"
+	"v1/no_group.api"
+)

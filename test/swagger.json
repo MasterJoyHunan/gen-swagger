@@ -1,0 +1,162 @@
+{
+    "openapi": "3.0.0",
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8888",
+            "description": "本地环境接口"
+        }
+    ],
+    "info": {
+        "title": "some app",
+        "version": "1.0.1"
+    },
+    "tags": [
+        {
+            "name": "用户相关"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Embed1": {
+                "type": "object",
+                "title": "Embed1",
+                "properties": {
+                    "Embed3": {
+                        "$ref": "#/definitions/Embed3"
+                    },
+                    "foo": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Embed2": {
+                "type": "object",
+                "title": "Embed2",
+                "properties": {
+                    "foo": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Embed3": {
+                "type": "object",
+                "title": "Embed3",
+                "properties": {
+                    "foo": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Value1": {
+                "type": "object",
+                "title": "Value1",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "bookRequest": {
+                "type": "object",
+                "title": "bookRequest",
+                "properties": {
+                    "Age": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "bookResponse": {
+                "type": "object",
+                "title": "bookResponse",
+                "properties": {
+                    "Code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Msg": {
+                        "type": "string"
+                    }
+                }
+            },
+            "cartRequest": {
+                "type": "object",
+                "title": "cartRequest",
+                "properties": {
+                    "Age": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "cartResponse": {
+                "type": "object",
+                "title": "cartResponse",
+                "properties": {
+                    "Age": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "userRequest": {
+                "type": "object",
+                "title": "userRequest",
+                "properties": {
+                    "": null,
+                    "Age": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Name": {
+                        "type": "string"
+                    },
+                    "embed1": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/"
+                        }
+                    },
+                    "embed2": {
+                        "$ref": "#/definitions/embed2"
+                    }
+                }
+            },
+            "userResponse": {
+                "type": "object",
+                "title": "userResponse",
+                "properties": {
+                    "": null,
+                    "Code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "Msg": {
+                        "type": "string"
+                    },
+                    "embed1": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/"
+                        }
+                    },
+                    "embed2": {
+                        "$ref": "#/definitions/embed2"
+                    }
+                }
+            }
+        }
+    }
+}
