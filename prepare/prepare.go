@@ -6,13 +6,14 @@ import (
 )
 
 var (
-	ApiSpec   *spec.ApiSpec
-	OutputDir string
-	ApiFile   string
-	AuthName  string
-	LocalApi  string
-	DevApi  string
-	ProdApi  string
+	ApiSpec      *spec.ApiSpec
+	OutputDir    string
+	ApiFile      string
+	AuthName     string
+	AuthPosition string
+	LocalApi     string
+	DevApi       string
+	ProdApi      string
 )
 
 func Setup() {

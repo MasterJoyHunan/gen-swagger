@@ -3,9 +3,6 @@ syntax = "v1"
 info(
 	title: "some app"
 	version: "1.0.1"
-	localApi: "www.baidu.com"
-	devApi: "www.baidu2.com"
-	prodApi: "www.baidu3.com"
 )
 
 import (

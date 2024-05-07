@@ -8,7 +8,7 @@ type OpenAPIJson struct {
 	Servers    []*Servers           `json:"servers,omitempty"`
 	Info       *Info                `json:"info,omitempty"`
 	Tags       []*Tag               `json:"tags,omitempty"`
-	Security   map[string]*Security `json:"security,omitempty"`
+	Security   map[string][]string  `json:"security"`
 	Paths      map[string]*PathItem `json:"paths,omitempty"`
 	Components *Components          `json:"components,omitempty"`
 }
@@ -37,19 +37,19 @@ type Security struct {
 }
 
 type PathItem struct {
-	Ref         string      `json:"$ref,omitempty"`
-	Summary     string      `json:"summary,omitempty"`
-	Description string      `json:"description,omitempty"`
-	Parameters  *Parameters `json:"parameters,omitempty"`
-	Get         *Operation  `json:"get,omitempty"`
-	Put         *Operation  `json:"put,omitempty"`
-	Post        *Operation  `json:"post,omitempty"`
-	Delete      *Operation  `json:"delete,omitempty"`
-	Options     *Operation  `json:"options,omitempty"`
-	Head        *Operation  `json:"head,omitempty"`
-	Patch       *Operation  `json:"patch,omitempty"`
-	Trace       *Operation  `json:"trace,omitempty"`
-	Servers     []*Servers  `json:"servers,omitempty"`
+	Ref         string        `json:"$ref,omitempty"`
+	Summary     string        `json:"summary,omitempty"`
+	Description string        `json:"description,omitempty"`
+	Parameters  []*Parameters `json:"parameters,omitempty"`
+	Get         *Operation    `json:"get,omitempty"`
+	Put         *Operation    `json:"put,omitempty"`
+	Post        *Operation    `json:"post,omitempty"`
+	Delete      *Operation    `json:"delete,omitempty"`
+	Options     *Operation    `json:"options,omitempty"`
+	Head        *Operation    `json:"head,omitempty"`
+	Patch       *Operation    `json:"patch,omitempty"`
+	Trace       *Operation    `json:"trace,omitempty"`
+	Servers     []*Servers    `json:"servers,omitempty"`
 }
 
 type Operation struct {
@@ -57,8 +57,8 @@ type Operation struct {
 	Summary     string               `json:"summary,omitempty"`
 	Description string               `json:"description,omitempty"`
 	OperationId string               `json:"operationId,omitempty"`
-	Parameters  any                  `json:"parameters,omitempty"`  // Parameters or Reference
-	RequestBody any                  `json:"requestBody,omitempty"` // RequestBody or Reference
+	Parameters  []*Parameters        `json:"parameters,omitempty"`  // Parameters or Reference
+	RequestBody *RequestBody         `json:"requestBody,omitempty"` // RequestBody or Reference
 	Responses   map[string]*Response `json:"responses,omitempty"`
 	Security    map[string][]string  `json:"security,omitempty"`
 }
@@ -88,9 +88,9 @@ type Reference struct {
 }
 
 type MediaType struct {
-	Schema   *Schema   `json:"schema,omitempty"`
-	Example  any       `json:"example,omitempty"`
-	Encoding *Encoding `json:"encoding,omitempty"`
+	Schema   *Schema              `json:"schema,omitempty"`
+	Example  any                  `json:"example,omitempty"`
+	Encoding map[string]*Encoding `json:"encoding,omitempty"`
 }
 
 type Encoding struct {
@@ -99,6 +99,7 @@ type Encoding struct {
 
 type Schema struct {
 	Ref                  string             `json:"$ref,omitempty"`
+	Description          string             `json:"description,omitempty"`
 	Type                 string             `json:"type,omitempty"`
 	Title                string             `json:"title,omitempty"`
 	Format               string             `json:"format,omitempty"`
@@ -109,5 +110,6 @@ type Schema struct {
 }
 
 type Components struct {
-	Schemas map[string]*Schema `json:"schemas,omitempty"`
+	Schemas         map[string]*Schema   `json:"schemas,omitempty"`
+	SecuritySchemes map[string]*Security `json:"securitySchemes,omitempty"`
 }

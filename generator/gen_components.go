@@ -1,11 +1,13 @@
 package generator
 
 import (
+	"fmt"
 	"reflect"
 	"strings"
 
 	"github.com/MasterJoyHunan/gen-swagger/prepare"
 	"github.com/MasterJoyHunan/gen-swagger/types"
+	"github.com/samber/lo"
 	"github.com/zeromicro/go-zero/tools/goctl/api/spec"
 )
 
@@ -28,49 +30,89 @@ func joinComponents(openapi *types.OpenAPIJson, t spec.Type) {
 		schema := &types.Schema{}
 		schema.Type = "object"
 		schema.Title = t.Name()
-		for _, member := range v.Members {
-			key, value := makeProperties(member.Name, member.Type)
-			if schema.Properties == nil {
-				schema.Properties = make(map[string]*types.Schema)
+		if schema.Properties == nil {
+			schema.Properties = make(map[string]*types.Schema)
+		}
+
+		members := deconstructionMember(v)
+
+		for _, member := range members {
+			// 过滤掉 uri ， path， form 的参数
+			continueFlag := false
+			for _, tag := range member.Tags() {
+				if lo.Contains([]string{"uri", "path"}, tag.Key) {
+					continueFlag = true
+					break
+				}
 			}
+
+			if continueFlag {
+				continue
+			}
+
+			// 剩下的才能成为 components
+			key, value := makeProperties(member)
 			schema.Properties[key] = value
 		}
-		openapi.Components.Schemas[t.Name()] = schema
+		if len(schema.Properties) != 0 {
+			openapi.Components.Schemas[t.Name()] = schema
+		}
+
 	case spec.ArrayType:
 		joinComponents(openapi, v.Value)
 	}
 }
 
-func makeProperties(name string, member spec.Type) (string, *types.Schema) {
-	switch v := member.(type) {
+func makeProperties(m spec.Member) (string, *types.Schema) {
+	switch v := m.Type.(type) {
 	case spec.DefineStruct:
-		return name, &types.Schema{
-			Ref: "#/definitions/" + name,
+
+		return getMemberName(m), &types.Schema{
+			Ref: "#/components/schemas/" + v.Name(),
 		}
 	case spec.PrimitiveType:
 		apiType, apiFmt := primitiveSchema(v.Name())
-		return name, &types.Schema{
-			Type:   apiType,
-			Format: apiFmt,
+		return getMemberName(m), &types.Schema{
+			Description: getTagComment(m),
+			Type:        apiType,
+			Format:      apiFmt,
 		}
 	case spec.MapType:
-		apiType, apiFmt := primitiveSchema(v.Key)
-		_, subProperties := makeProperties("", v.Value)
-		return name, &types.Schema{
-			Type: "object",
-			AdditionalProperties: &types.Schema{
-				Type:       apiType,
-				Format:     apiFmt,
-				Properties: subProperties,
-			},
+		apiKeyType, _ := primitiveSchema(v.Key)
+		_, subProperties := makeProperties(spec.Member{
+			Name:     m.Name,
+			Type:     v.Value,
+			Tag:      m.Tag,
+			Comment:  m.Comment,
+			Docs:     m.Docs,
+			IsInline: m.IsInline,
+		})
+
+		valType := ""
+		if len(subProperties.Type) > 0 {
+			valType = subProperties.Type
+		} else {
+			valType = "object"
+		}
+		return getMemberName(m), &types.Schema{
+			Description:          fmt.Sprintf("use map, key(%s), val(%s)", apiKeyType, valType),
+			Type:                 "object",
+			AdditionalProperties: subProperties,
 		}
 	case spec.ArrayType:
-		_, subProperties := makeProperties("", v.Value)
+		_, subProperties := makeProperties(spec.Member{
+			Name:     m.Name,
+			Type:     v.Value,
+			Tag:      m.Tag,
+			Comment:  m.Comment,
+			Docs:     m.Docs,
+			IsInline: m.IsInline,
+		})
 		schema := &types.Schema{
 			Type:  "array",
 			Items: subProperties,
 		}
-		return name, schema
+		return getMemberName(m), schema
 	case spec.InterfaceType:
 		// TODO 暂时未完成
 	case spec.PointerType:

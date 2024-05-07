@@ -11,6 +11,10 @@ func GenServers(openapi *types.OpenAPIJson) error {
 			Url:         prepare.LocalApi,
 			Description: "本地环境接口",
 		})
+	} else {
+		openapi.Servers = append(openapi.Servers, &types.Servers{
+			Url: "/",
+		})
 	}
 
 	if len(prepare.DevApi) > 0 {

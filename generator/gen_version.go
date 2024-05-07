@@ -5,6 +5,6 @@ import (
 )
 
 func GenVersion(openapi *types.OpenAPIJson) error {
-	openapi.Openapi = "3.0.0" // 固定的
+	openapi.Openapi = "3.1.0" // 固定的
 	return nil
 }

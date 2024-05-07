@@ -1,9 +1,8 @@
 {
-    "openapi": "3.0.0",
+    "openapi": "3.1.0",
     "servers": [
         {
-            "url": "http://127.0.0.1:8888",
-            "description": "本地环境接口"
+            "url": "/"
         }
     ],
     "info": {
@@ -13,61 +12,454 @@
     "tags": [
         {
             "name": "用户相关"
+        },
+        {
+            "name": "书本"
+        },
+        {
+            "name": "swagger"
+        },
+        {
+            "name": "购物车"
         }
     ],
+    "security": {
+        "apiKey": []
+    },
+    "paths": {
+        "/book": {
+            "get": {
+                "tags": [
+                    "书本"
+                ],
+                "summary": "获取所有书本信息",
+                "operationId": "387d65e6-33b2-41e4-b775-67676183529b",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "姓名"
+                    },
+                    {
+                        "name": "age",
+                        "in": "query",
+                        "description": "年龄"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/bookResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "书本"
+                ],
+                "summary": "添加书本信息",
+                "operationId": "20d71fc8-0f61-4ca3-88f5-6f13c9488430",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/bookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/bookResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/book/{id}": {
+            "get": {
+                "tags": [
+                    "书本"
+                ],
+                "summary": "获取书本信息",
+                "operationId": "c30902cb-eeee-43cb-ab94-baf473486f8a",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "姓名"
+                    },
+                    {
+                        "name": "age",
+                        "in": "query",
+                        "description": "年龄"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/bookResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "书本"
+                ],
+                "summary": "编辑书本信息",
+                "operationId": "809f0aa0-d1e0-4627-a01f-97b79325734d",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/bookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/bookResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cart": {
+            "get": {
+                "tags": [
+                    "购物车"
+                ],
+                "summary": "获取所有购物车信息",
+                "operationId": "8cd34e40-d89d-4147-b8f4-2d4f51af9408",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/cartRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cartResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "购物车"
+                ],
+                "summary": "添加购物车信息",
+                "operationId": "a09bb478-5d1b-4951-af15-9617ac2945de",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/cartRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cartResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cart/{id}": {
+            "get": {
+                "tags": [
+                    "购物车"
+                ],
+                "summary": "获取购物车信息",
+                "operationId": "68795b35-9d50-47ab-b27c-9e9e8edf4fea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/cartRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cartResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "购物车"
+                ],
+                "summary": "编辑购物车信息",
+                "operationId": "52988e95-e527-4ca1-9e71-2a9a3dbd4aec",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/cartRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cartResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ping": {
+            "get": {
+                "summary": "无Group信息",
+                "operationId": "a86afe4d-d33c-4c08-9005-5277183dbfe2"
+            }
+        },
+        "/swagger": {
+            "get": {
+                "tags": [
+                    "swagger"
+                ],
+                "operationId": "73173312-8890-4139-9658-222e67de7c75"
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "获取所有用户信息",
+                "operationId": "0792f97f-6a2b-4fec-8259-56fab3746c03",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "用户ID3",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "姓名",
+                        "required": true
+                    },
+                    {
+                        "name": "test1",
+                        "in": "query",
+                        "description": "他1"
+                    },
+                    {
+                        "name": "test2",
+                        "in": "query",
+                        "description": "他2"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/userResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "添加用户信息",
+                "operationId": "388dab1c-3a8a-4166-8f08-9acaadf39cd3",
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/userResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "获取用户信息",
+                "operationId": "d79d9d85-a90c-439e-be68-f3e56b400ab3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "用户ID3",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "姓名",
+                        "required": true
+                    },
+                    {
+                        "name": "test1",
+                        "in": "query",
+                        "description": "他1"
+                    },
+                    {
+                        "name": "test2",
+                        "in": "query",
+                        "description": "他2"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/userResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "编辑用户信息",
+                "operationId": "3cdf181e-833d-4189-b10c-1983e56e3bd6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "用户ID3",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "姓名",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/userRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/userResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
     "components": {
         "schemas": {
-            "Embed1": {
-                "type": "object",
-                "title": "Embed1",
-                "properties": {
-                    "Embed3": {
-                        "$ref": "#/definitions/Embed3"
-                    },
-                    "foo": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "Embed2": {
-                "type": "object",
-                "title": "Embed2",
-                "properties": {
-                    "foo": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "Embed3": {
-                "type": "object",
-                "title": "Embed3",
-                "properties": {
-                    "foo": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "Value1": {
-                "type": "object",
-                "title": "Value1",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    }
-                }
-            },
             "bookRequest": {
                 "type": "object",
                 "title": "bookRequest",
                 "properties": {
-                    "Age": {
+                    "age": {
+                        "description": "年龄",
                         "type": "integer",
                         "format": "int32"
                     },
-                    "Name": {
+                    "name": {
+                        "description": "姓名",
                         "type": "string"
                     }
                 }
@@ -76,11 +468,13 @@
                 "type": "object",
                 "title": "bookResponse",
                 "properties": {
-                    "Code": {
+                    "code": {
+                        "description": "业务码",
                         "type": "integer",
                         "format": "int32"
                     },
-                    "Msg": {
+                    "msg": {
+                        "description": "业务消息",
                         "type": "string"
                     }
                 }
@@ -89,11 +483,13 @@
                 "type": "object",
                 "title": "cartRequest",
                 "properties": {
-                    "Age": {
+                    "age": {
+                        "description": "年龄",
                         "type": "integer",
                         "format": "int32"
                     },
-                    "Name": {
+                    "name": {
+                        "description": "姓名",
                         "type": "string"
                     }
                 }
@@ -102,11 +498,13 @@
                 "type": "object",
                 "title": "cartResponse",
                 "properties": {
-                    "Age": {
+                    "age": {
+                        "description": "年龄",
                         "type": "integer",
                         "format": "int32"
                     },
-                    "Name": {
+                    "name": {
+                        "description": "姓名",
                         "type": "string"
                     }
                 }
@@ -115,22 +513,27 @@
                 "type": "object",
                 "title": "userRequest",
                 "properties": {
-                    "": null,
-                    "Age": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "Name": {
+                    "test1": {
+                        "description": "他1",
                         "type": "string"
                     },
-                    "embed1": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/"
-                        }
+                    "test2": {
+                        "description": "他2",
+                        "type": "string"
+                    }
+                }
+            },
+            "userRequest2": {
+                "type": "object",
+                "title": "userRequest2",
+                "properties": {
+                    "test1": {
+                        "description": "他1",
+                        "type": "string"
                     },
-                    "embed2": {
-                        "$ref": "#/definitions/embed2"
+                    "test2": {
+                        "description": "他2",
+                        "type": "string"
                     }
                 }
             },
@@ -138,24 +541,20 @@
                 "type": "object",
                 "title": "userResponse",
                 "properties": {
-                    "": null,
-                    "Code": {
+                    "code": {
+                        "description": "姓名t32est",
                         "type": "integer",
                         "format": "int32"
-                    },
-                    "Msg": {
-                        "type": "string"
-                    },
-                    "embed1": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/"
-                        }
-                    },
-                    "embed2": {
-                        "$ref": "#/definitions/embed2"
                     }
                 }
+            }
+        },
+        "securitySchemes": {
+            "apiKey": {
+                "type": "apiKey",
+                "description": "Enter JWT Bearer token **_only_**",
+                "name": "",
+                "in": ""
             }
         }
     }

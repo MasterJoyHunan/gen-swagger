@@ -1,38 +1,42 @@
 syntax = "v1"
 
 type userRequest {
-    Name string `path:"name"`    // 姓名
-    Age int `json:"age"`
-    embed1 []Embed1 `json:"em1"` // xs
-    embed2 Embed2 `json:"em2"`   // dsd
-    map2 map[string]Value1 `json:"map2"`
+    PathId
+    Name string `path:"name"`   // 姓名
+    Test1 string `form:"test1"` // 他1
+    Test2 string `form:"test2"` // 他2
+}
+
+type userRequest2 {
+    PathId
+    Name string `path:"name"`   // 姓名
+    Test1 string `form:"test1"` // 他1
+    Test2 string `form:"test2"` // 他2
+}
+
+type userRequest3 {
+    PathId1
 }
 
 type userResponse {
-    Code int `json:"code"`
-    Msg string `json:"msg"`
-    embed1 []Embed1 `json:"em1"`
-    embed2 Embed2 `json:"em2"`
-    map1 map[string]string `json:"map1"` // test
-    map2 map[string]Value1 `json:"map2"`
+    Code int `json:"code"` // 姓名t32est
 }
 
-type Embed1 {
-    foo int `json:"foo"`          // x
-    Embed3 Embed3 `json:"embed3"` // esc234
-}
-type Embed2 {
-    foo int `json:"foo"` // y
+type PathId {
+    ID int `uri:"id"` // 用户ID3
 }
 
-type Embed3 {
-    foo int `json:"foo"` // Embed3
+type PathId1 {
+    PathId2
 }
 
+type PathId2 {
+    PathId3
+    ID2 int `uri:"id2"` // 用户ID2
+}
 
-
-type Value1 {
-    name string `json:"name"` // vads3
+type PathId3 {
+    ID int `uri:"id"` // 用户ID
 }
 
 
@@ -46,20 +50,19 @@ type Value1 {
 
 
 service someapp {
-	@doc "获取所有用户信息"
-	@handler getUserList
-	get /user (userRequest) returns (userResponse)
+    @doc "获取所有用户信息"
+    @handler getUserList
+    get /user (userRequest) returns (userResponse)
 
-	@doc "获取用户信息"
-	@handler getUser
-	get /user/:id (userRequest) returns (userResponse)
+    @doc "获取用户信息"
+    @handler getUser
+    get /user/:id (userRequest2) returns (userResponse)
 
-	@doc "添加用户信息"
-	@handler addUser
-	post /user (userRequest) returns (userResponse)
+    @doc "添加用户信息"
+    @handler addUser
+    post /user (userRequest3) returns (userResponse)
 
-	@doc "编辑用户信息"
-	@handler editUser
-	put /user/:id (userRequest) returns (userResponse)
-
+    @doc "编辑用户信息"
+    @handler editUser
+    put /user/:id (userRequest) returns (userResponse)
 }
