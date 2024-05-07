@@ -28,7 +28,7 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().StringVar(&prepare.OutputDir, "dir", ".", "生成项目目录")
+	rootCmd.Flags().StringVar(&prepare.OutputFile, "file", "asset/swagger/swagger.json", "生成swagger文件")
 	rootCmd.Flags().StringVar(&prepare.AuthName, "auth_name", "Authorization", "权限认证请求名")
 	rootCmd.Flags().StringVar(&prepare.AuthPosition, "auth_position", "header", "权限认证请求位置 header,query,cookie")
 	rootCmd.Flags().StringVar(&prepare.LocalApi, "local_api", "127.0.0.1:8888", "本地环境请求地址")
@@ -48,6 +48,7 @@ func GenSwaggerCode(cmd *cobra.Command, args []string) error {
 	Must(generator.GenComponents(openapi))
 	Must(generator.GenPaths(openapi))
 	Must(generator.GenSecurity(openapi))
+	Must(generator.SaveFile(openapi))
 
 	return nil
 }

@@ -18,7 +18,7 @@ import (
 var swaggerHtml string
 
 func TestGenSwagger(t *testing.T) {
-	prepare.OutputDir = "example"
+	prepare.OutputFile = "example"
 	prepare.ApiFile = "api/someapp.api"
 	prepare.LocalApi = "http://127.0.0.1:8888"
 	prepare.Setup()

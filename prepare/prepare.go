@@ -7,7 +7,7 @@ import (
 
 var (
 	ApiSpec      *spec.ApiSpec
-	OutputDir    string
+	OutputFile   string
 	ApiFile      string
 	AuthName     string
 	AuthPosition string
