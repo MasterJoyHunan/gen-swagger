@@ -166,7 +166,7 @@ import (
 var swaggerHtml string
 
 // Setup 生成 swagger 格式的文档
-func main(c *gin.Engine) {
+func main() {
     c := gin.New()
     c.GET("/swagger", func(ctx *gin.Context) {
         ctx.Header("Content-Type", "text/html; charset=utf-8")
