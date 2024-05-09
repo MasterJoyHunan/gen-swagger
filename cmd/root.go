@@ -14,7 +14,7 @@ var (
 	rootCmd = &cobra.Command{
 		Use:     "gen-swagger",
 		Short:   "生成基于 GIN 框架的 WEB 服务的极简项目结构",
-		Example: "gen-swagger --dir= some.api",
+		Example: "gen-swagger --file=asset/swagger/swagger.json some.api",
 		Args:    cobra.ExactValidArgs(1),
 		RunE:    GenSwaggerCode,
 	}

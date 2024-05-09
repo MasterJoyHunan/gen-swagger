@@ -69,7 +69,7 @@ func parseOperation(route spec.Route, g spec.Group) *types.Operation {
 }
 
 func parseParams(r spec.Route) (params []*types.Parameters) {
-	if r.ResponseType == nil {
+	if r.RequestType == nil {
 		return
 	}
 
@@ -165,19 +165,35 @@ func parseResponses(r spec.Route) map[string]*types.Response {
 		return nil
 	}
 
-	resp := &types.Response{
-		Content: make(map[string]*types.MediaType),
-	}
-
-	resp.Content["application/json"] = &types.MediaType{
-		Schema: &types.Schema{
-			Ref: "#/components/schemas/" + r.ResponseType.Name(),
+	return map[string]*types.Response{
+		"200": {
+			Content: map[string]*types.MediaType{
+				"application/json": {
+					Schema: parseResponse(r.ResponseType),
+				},
+			},
 		},
 	}
+}
 
-	return map[string]*types.Response{
-		"default": resp,
+func parseResponse(t spec.Type) *types.Schema {
+	s := &types.Schema{}
+	switch v := t.(type) {
+	case spec.DefineStruct:
+		s.Type = "object"
+		s.Ref = "#/components/schemas/" + t.Name()
+
+	case spec.ArrayType:
+		s.Type = "array"
+		s.Items = parseResponse(v.Value)
+
+	case spec.PrimitiveType:
+		apiType, apiFmt := primitiveSchema(v.Name())
+		s.Type = apiType
+		s.Format = apiFmt
 	}
+
+	return s
 }
 
 func parseComment(r spec.Route) string {

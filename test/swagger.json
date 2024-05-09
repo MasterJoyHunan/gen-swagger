@@ -2,7 +2,8 @@
     "openapi": "3.1.0",
     "servers": [
         {
-            "url": "/"
+            "url": "http://127.0.0.1:8888",
+            "description": "本地环境接口"
         }
     ],
     "info": {
@@ -33,7 +34,7 @@
                     "书本"
                 ],
                 "summary": "获取所有书本信息",
-                "operationId": "387d65e6-33b2-41e4-b775-67676183529b",
+                "operationId": "60c0792d-e89f-41e9-9de2-8745a03f679a",
                 "parameters": [
                     {
                         "name": "name",
@@ -47,11 +48,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/bookResponse"
+                                    "$ref": "#/components/schemas/bookResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -63,7 +65,7 @@
                     "书本"
                 ],
                 "summary": "添加书本信息",
-                "operationId": "20d71fc8-0f61-4ca3-88f5-6f13c9488430",
+                "operationId": "c7994a0b-253d-4d03-a4ee-6aa1e40b575f",
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
@@ -74,11 +76,12 @@
                     }
                 },
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/bookResponse"
+                                    "$ref": "#/components/schemas/bookResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -92,7 +95,7 @@
                     "书本"
                 ],
                 "summary": "获取书本信息",
-                "operationId": "c30902cb-eeee-43cb-ab94-baf473486f8a",
+                "operationId": "34cc433c-79d4-4626-a4ff-36c8a2f9405f",
                 "parameters": [
                     {
                         "name": "name",
@@ -106,11 +109,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/bookResponse"
+                                    "$ref": "#/components/schemas/bookResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -122,7 +126,7 @@
                     "书本"
                 ],
                 "summary": "编辑书本信息",
-                "operationId": "809f0aa0-d1e0-4627-a01f-97b79325734d",
+                "operationId": "2c3fdec0-32a5-4290-9928-16f6f1d3f804",
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
@@ -133,11 +137,12 @@
                     }
                 },
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/bookResponse"
+                                    "$ref": "#/components/schemas/bookResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -151,7 +156,7 @@
                     "购物车"
                 ],
                 "summary": "获取所有购物车信息",
-                "operationId": "8cd34e40-d89d-4147-b8f4-2d4f51af9408",
+                "operationId": "367b845d-357e-43e3-a288-8d7481d4529d",
                 "parameters": [
                     {
                         "name": "id",
@@ -169,11 +174,12 @@
                     }
                 },
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/cartResponse"
+                                    "$ref": "#/components/schemas/cartResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -185,7 +191,7 @@
                     "购物车"
                 ],
                 "summary": "添加购物车信息",
-                "operationId": "a09bb478-5d1b-4951-af15-9617ac2945de",
+                "operationId": "540468b0-926d-4475-9738-1d216252cc05",
                 "parameters": [
                     {
                         "name": "id",
@@ -203,11 +209,12 @@
                     }
                 },
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/cartResponse"
+                                    "$ref": "#/components/schemas/cartResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -221,7 +228,7 @@
                     "购物车"
                 ],
                 "summary": "获取购物车信息",
-                "operationId": "68795b35-9d50-47ab-b27c-9e9e8edf4fea",
+                "operationId": "d8b2415c-a0be-4519-8649-969df0beec78",
                 "parameters": [
                     {
                         "name": "id",
@@ -239,11 +246,12 @@
                     }
                 },
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/cartResponse"
+                                    "$ref": "#/components/schemas/cartResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -255,7 +263,7 @@
                     "购物车"
                 ],
                 "summary": "编辑购物车信息",
-                "operationId": "52988e95-e527-4ca1-9e71-2a9a3dbd4aec",
+                "operationId": "11ec67bb-65c3-4817-a18a-1f091d9d29ad",
                 "parameters": [
                     {
                         "name": "id",
@@ -273,11 +281,12 @@
                     }
                 },
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/cartResponse"
+                                    "$ref": "#/components/schemas/cartResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -288,7 +297,7 @@
         "/ping": {
             "get": {
                 "summary": "无Group信息",
-                "operationId": "a86afe4d-d33c-4c08-9005-5277183dbfe2"
+                "operationId": "74043c4b-7d70-44f7-a21d-12ded9f88d9f"
             }
         },
         "/swagger": {
@@ -296,7 +305,7 @@
                 "tags": [
                     "swagger"
                 ],
-                "operationId": "73173312-8890-4139-9658-222e67de7c75"
+                "operationId": "17247960-fccd-45d5-8e62-665990926084"
             }
         },
         "/user": {
@@ -305,7 +314,7 @@
                     "用户相关"
                 ],
                 "summary": "获取所有用户信息",
-                "operationId": "0792f97f-6a2b-4fec-8259-56fab3746c03",
+                "operationId": "845f975c-9bcf-4cbe-ab18-3ec2febb264e",
                 "parameters": [
                     {
                         "name": "id",
@@ -331,11 +340,15 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/userResponse"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/userResponse",
+                                        "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -347,13 +360,14 @@
                     "用户相关"
                 ],
                 "summary": "添加用户信息",
-                "operationId": "388dab1c-3a8a-4166-8f08-9acaadf39cd3",
+                "operationId": "302ccc7a-08ab-4e91-81bb-7027fc32e6bc",
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/userResponse"
+                                    "$ref": "#/components/schemas/userResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -367,7 +381,7 @@
                     "用户相关"
                 ],
                 "summary": "获取用户信息",
-                "operationId": "d79d9d85-a90c-439e-be68-f3e56b400ab3",
+                "operationId": "647daeed-c7c3-42a1-8b63-ca1512702aea",
                 "parameters": [
                     {
                         "name": "id",
@@ -393,11 +407,14 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/userResponse"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
                                 }
                             }
                         }
@@ -409,7 +426,7 @@
                     "用户相关"
                 ],
                 "summary": "编辑用户信息",
-                "operationId": "3cdf181e-833d-4189-b10c-1983e56e3bd6",
+                "operationId": "3ed86892-5983-4430-ac5f-3d996dc52c35",
                 "parameters": [
                     {
                         "name": "id",
@@ -434,11 +451,12 @@
                     }
                 },
                 "responses": {
-                    "default": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/userResponse"
+                                    "$ref": "#/components/schemas/userResponse",
+                                    "type": "object"
                                 }
                             }
                         }

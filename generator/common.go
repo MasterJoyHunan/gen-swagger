@@ -6,7 +6,7 @@ import "github.com/zeromicro/go-zero/tools/goctl/api/spec"
 func deconstructionMember(d spec.DefineStruct) []spec.Member {
 	var members []spec.Member
 	for _, member := range d.Members {
-		if member.IsInline {
+		if member.IsInline { // TODO 内嵌多层会出现问题,暂时没解决
 			members = append(members, deconstructionMember(member.Type.(spec.DefineStruct))...)
 		} else {
 			members = append(members, member)

@@ -17,7 +17,6 @@ func GenComponents(openapi *types.OpenAPIJson) error {
 	for _, t := range prepare.ApiSpec.Types {
 		joinComponents(openapi, t)
 	}
-
 	return nil
 }
 
@@ -25,48 +24,43 @@ func joinComponents(openapi *types.OpenAPIJson, t spec.Type) {
 	if _, ok := openapi.Components.Schemas[t.Name()]; ok {
 		return
 	}
-	switch v := t.(type) {
-	case spec.DefineStruct:
-		schema := &types.Schema{}
-		schema.Type = "object"
-		schema.Title = t.Name()
-		if schema.Properties == nil {
-			schema.Properties = make(map[string]*types.Schema)
-		}
 
-		members := deconstructionMember(v)
+	v := t.(spec.DefineStruct)
+	schema := &types.Schema{}
+	schema.Type = "object"
+	schema.Title = t.Name()
+	if schema.Properties == nil {
+		schema.Properties = make(map[string]*types.Schema)
+	}
 
-		for _, member := range members {
-			// 过滤掉 uri ， path， form 的参数
-			continueFlag := false
-			for _, tag := range member.Tags() {
-				if lo.Contains([]string{"uri", "path"}, tag.Key) {
-					continueFlag = true
-					break
-				}
+	members := deconstructionMember(v)
+
+	for _, member := range members {
+		// 过滤掉 uri，path 的参数
+		continueFlag := false
+		for _, tag := range member.Tags() {
+			if lo.Contains([]string{"uri", "path"}, tag.Key) {
+				continueFlag = true
+				break
 			}
-
-			if continueFlag {
-				continue
-			}
-
-			// 剩下的才能成为 components
-			key, value := makeProperties(member)
-			schema.Properties[key] = value
-		}
-		if len(schema.Properties) != 0 {
-			openapi.Components.Schemas[t.Name()] = schema
 		}
 
-	case spec.ArrayType:
-		joinComponents(openapi, v.Value)
+		if continueFlag {
+			continue
+		}
+
+		// 剩下的才能成为 components
+		key, value := makeProperties(member)
+		schema.Properties[key] = value
+	}
+	if len(schema.Properties) != 0 {
+		openapi.Components.Schemas[t.Name()] = schema
 	}
 }
 
 func makeProperties(m spec.Member) (string, *types.Schema) {
 	switch v := m.Type.(type) {
 	case spec.DefineStruct:
-
 		return getMemberName(m), &types.Schema{
 			Ref: "#/components/schemas/" + v.Name(),
 		}

@@ -52,11 +52,11 @@ type PathId3 {
 service someapp {
     @doc "获取所有用户信息"
     @handler getUserList
-    get /user (userRequest) returns (userResponse)
+    get /user (userRequest) returns ([]userResponse)
 
     @doc "获取用户信息"
     @handler getUser
-    get /user/:id (userRequest2) returns (userResponse)
+    get /user/:id (userRequest2) returns ([]string)
 
     @doc "添加用户信息"
     @handler addUser
