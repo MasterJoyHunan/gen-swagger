@@ -25,7 +25,14 @@ func joinPaths(openapi *types.OpenAPIJson, g spec.Group) {
 	for _, route := range g.Routes {
 
 		reg := regexp.MustCompile(`:([\w-]+)`)
-		path := reg.ReplaceAllString(route.Path, `{${1}}`)
+
+		path := route.Path
+		prefix := g.GetAnnotation(spec.RoutePrefixKey)
+		if len(prefix) > 0 {
+			path = prefix + path
+
+		}
+		path = reg.ReplaceAllString(path, `{${1}}`)
 		_, ok := openapi.Paths[path]
 		if !ok {
 			openapi.Paths[path] = new(types.PathItem)
