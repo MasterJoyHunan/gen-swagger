@@ -24,6 +24,30 @@ type (
         PathID
         AddUserRequest
     }
+
+    ComplexRequest {
+        PathID
+        AddUserRequest
+        Complex1 string `form:"complex1"`
+    }
+
+    Complex2 {
+        ComplexRequest
+    }
+
+    Complex3 {
+        Complex4 string `form:"complex4"`
+    }
+
+    ComplexResponse {
+        Text1 string `json:"text1"`
+        IDAndNameWithChildren
+    }
+
+    FileRequest {
+        File string `form:"file001" file:""`
+        Other string `form:"other"`
+    }
 )
 
 
@@ -56,4 +80,16 @@ service someapp {
     @doc "删除用户信息"
     @handler deleteUser
     delete /user/:id (PathID)
+
+    @doc "复杂嵌套请求"
+    @handler complex1
+    get /complex1 (ComplexRequest) returns ([]ComplexResponse)
+
+    @doc "复杂嵌套请求"
+    @handler complex2
+    post /complex2 (ComplexRequest) returns ([]ComplexResponse)
+
+    @doc "文件上传"
+    @handler file
+    post /file (FileRequest)
 }

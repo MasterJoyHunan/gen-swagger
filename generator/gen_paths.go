@@ -129,6 +129,11 @@ func parseRequestBody(r spec.Route) *types.RequestBody {
 		return nil
 	}
 
+	// GET 请求不支持 form-data 和 json 传参
+	if r.Method == "get" {
+		return nil
+	}
+
 	var content = make(map[string]*types.MediaType)
 
 	// content["application/json"] = xxx
@@ -138,19 +143,32 @@ func parseRequestBody(r spec.Route) *types.RequestBody {
 	defineStruct := r.RequestType.(spec.DefineStruct)
 	members := deconstructionMember(defineStruct)
 	for _, member := range members {
-		tagKeys := lo.Map(member.Tags(), func(item *spec.Tag, index int) string {
-			return item.Key
-		})
+		if !(member.IsFormMember() || member.IsBodyMember()) {
+			continue
+		}
 
-		if lo.Contains(tagKeys, "json") {
-			content["application/json"] = &types.MediaType{
-				Schema: &types.Schema{
-					Ref: "#/components/schemas/" + r.RequestType.Name(),
-				},
+		if member.IsFormMember() {
+			// 支持文件 FileRequest { File string `form:"file" file:"image/png, image/jpeg"` }
+
+			if isFileMember(member) {
+				content["multipart/form-data"] = &types.MediaType{
+					Schema: &types.Schema{
+						Ref: "#/components/schemas/" + r.RequestType.Name(),
+					},
+				}
+			} else {
+				content["application/x-www-form-urlencoded"] = &types.MediaType{
+					Schema: &types.Schema{
+						Ref: "#/components/schemas/" + r.RequestType.Name(),
+					},
+				}
 			}
+
 			break
-		} else if r.Method != "get" && lo.Contains(tagKeys, "form") {
-			content["application/x-www-form-urlencoded"] = &types.MediaType{
+		}
+
+		if member.IsBodyMember() {
+			content["application/json"] = &types.MediaType{
 				Schema: &types.Schema{
 					Ref: "#/components/schemas/" + r.RequestType.Name(),
 				},
@@ -211,7 +229,7 @@ func parseComment(r spec.Route) string {
 	if len(r.HandlerDoc) != 0 {
 		str := ""
 		for _, d := range r.HandlerDoc {
-			str += strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(d, "/", ""), "*", ""), "\n", ""), "\t", "")
+			str += strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(d, "/", ""), "*", ""))
 		}
 		return str
 	}
@@ -249,4 +267,13 @@ func getSpecialTag(tagName string, tags []*spec.Tag) *spec.Tag {
 
 func getTagComment(m spec.Member) string {
 	return strings.TrimSpace(strings.TrimPrefix(m.GetComment(), "//"))
+}
+
+func isFileMember(m spec.Member) bool {
+	for _, tag := range m.Tags() {
+		if tag.Key == "file" {
+			return true
+		}
+	}
+	return false
 }

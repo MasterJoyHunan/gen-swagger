@@ -9,4 +9,19 @@ type (
 	PathID {
 		ID int `path:"id"`
 	}
+
+    IDs {
+        ID []int `json:"id"`
+    }
+
+    IDAndName {
+        ID int `json:"id"`
+        Name string `json:"name"`
+    }
+
+    IDAndNameWithChildren {
+        ID int `json:"id"`
+        Name string `json:"name"`
+        Children []IDAndNameWithChildren `json:"children"`
+    }
 )

@@ -65,6 +65,14 @@ func makeProperties(m spec.Member) (string, *types.Schema) {
 			Ref: "#/components/schemas/" + v.Name(),
 		}
 	case spec.PrimitiveType:
+		// 支持文件
+		if isFileMember(m) {
+			return getMemberName(m), &types.Schema{
+				Description: getTagComment(m),
+				Type:        "file",
+			}
+		}
+
 		apiType, apiFmt := primitiveSchema(v.Name())
 		return getMemberName(m), &types.Schema{
 			Description: getTagComment(m),
