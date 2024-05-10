@@ -1,43 +1,30 @@
 syntax = "v1"
 
-type userRequest {
-    PathId
-    Name string `path:"name"`   // 姓名
-    Test1 string `form:"test1"` // 他1
-    Test2 string `form:"test2"` // 他2
-}
+type (
+    UserListRequest {
+        PageListRequest
+        Name string `form:"name"` // 姓名
+    }
 
-type userRequest2 {
-    PathId
-    Name string `path:"name"`   // 姓名
-    Test1 string `form:"test1"` // 他1
-    Test2 string `form:"test2"` // 他2
-}
+    UserListResponse {
+        Data []UserList `json:"data"` // 用户数据
+        Total int `json:"total"` // 总条数
+    }
 
-type userRequest3 {
-    PathId1
-}
+    UserList {
+        ID int `json:"id"`
+        Name string `json:"name"` // 姓名
+    }
 
-type userResponse {
-    Code int `json:"code"` // 姓名t32est
-}
+    AddUserRequest {
+        Name string `json:"name"` // 姓名
+    }
 
-type PathId {
-    ID int `uri:"id"` // 用户ID3
-}
-
-type PathId1 {
-    PathId2
-}
-
-type PathId2 {
-    PathId3
-    ID2 int `uri:"id2"` // 用户ID2
-}
-
-type PathId3 {
-    ID int `uri:"id"` // 用户ID
-}
+    EditUserRequest {
+        PathID
+        AddUserRequest
+    }
+)
 
 
 @server(
@@ -52,17 +39,21 @@ type PathId3 {
 service someapp {
     @doc "获取所有用户信息"
     @handler getUserList
-    get /user (userRequest) returns ([]userResponse)
+    get /user (UserListRequest) returns (UserListResponse)
 
     @doc "获取用户信息"
     @handler getUser
-    get /user/:id (userRequest2) returns ([]string)
+    get /user/:id (PathID) returns (UserList)
 
     @doc "添加用户信息"
     @handler addUser
-    post /user (userRequest3) returns (userResponse)
+    post /user (AddUserRequest)
 
     @doc "编辑用户信息"
     @handler editUser
-    put /user/:id (userRequest) returns (userResponse)
+    put /user/:id (EditUserRequest)
+
+    @doc "删除用户信息"
+    @handler deleteUser
+    delete /user/:id (PathID)
 }

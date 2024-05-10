@@ -1,0 +1,12 @@
+syntax = "v1"
+
+type (
+    PageListRequest {
+        Page int `form:"page"` // 页码
+        PageSize int `form:"pageSize"` // 每页显示条数
+    }
+
+	PathID {
+		ID int `path:"id"`
+	}
+)

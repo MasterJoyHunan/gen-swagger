@@ -129,7 +129,8 @@ func parseRequestBody(r spec.Route) *types.RequestBody {
 	// content["multipart/form-data"] = xxx  -- 可以传文件
 
 	defineStruct := r.RequestType.(spec.DefineStruct)
-	for _, member := range defineStruct.Members {
+	members := deconstructionMember(defineStruct)
+	for _, member := range members {
 		tagKeys := lo.Map(member.Tags(), func(item *spec.Tag, index int) string {
 			return item.Key
 		})

@@ -7,336 +7,39 @@
         }
     ],
     "info": {
-        "title": "some app",
-        "version": "1.0.1"
+        "title": "some app"
     },
     "tags": [
         {
             "name": "用户相关"
-        },
-        {
-            "name": "书本"
-        },
-        {
-            "name": "swagger"
-        },
-        {
-            "name": "购物车"
         }
     ],
     "security": {
         "apiKey": []
     },
     "paths": {
-        "/book": {
-            "get": {
-                "tags": [
-                    "书本"
-                ],
-                "summary": "获取所有书本信息",
-                "operationId": "60c0792d-e89f-41e9-9de2-8745a03f679a",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "姓名"
-                    },
-                    {
-                        "name": "age",
-                        "in": "query",
-                        "description": "年龄"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/bookResponse",
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "书本"
-                ],
-                "summary": "添加书本信息",
-                "operationId": "c7994a0b-253d-4d03-a4ee-6aa1e40b575f",
-                "requestBody": {
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "$ref": "#/components/schemas/bookRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/bookResponse",
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/book/{id}": {
-            "get": {
-                "tags": [
-                    "书本"
-                ],
-                "summary": "获取书本信息",
-                "operationId": "34cc433c-79d4-4626-a4ff-36c8a2f9405f",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "姓名"
-                    },
-                    {
-                        "name": "age",
-                        "in": "query",
-                        "description": "年龄"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/bookResponse",
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "书本"
-                ],
-                "summary": "编辑书本信息",
-                "operationId": "2c3fdec0-32a5-4290-9928-16f6f1d3f804",
-                "requestBody": {
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "$ref": "#/components/schemas/bookRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/bookResponse",
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/cart": {
-            "get": {
-                "tags": [
-                    "购物车"
-                ],
-                "summary": "获取所有购物车信息",
-                "operationId": "367b845d-357e-43e3-a288-8d7481d4529d",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/cartRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/cartResponse",
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "购物车"
-                ],
-                "summary": "添加购物车信息",
-                "operationId": "540468b0-926d-4475-9738-1d216252cc05",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/cartRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/cartResponse",
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/cart/{id}": {
-            "get": {
-                "tags": [
-                    "购物车"
-                ],
-                "summary": "获取购物车信息",
-                "operationId": "d8b2415c-a0be-4519-8649-969df0beec78",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/cartRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/cartResponse",
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "购物车"
-                ],
-                "summary": "编辑购物车信息",
-                "operationId": "11ec67bb-65c3-4817-a18a-1f091d9d29ad",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/cartRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/cartResponse",
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/ping": {
-            "get": {
-                "summary": "无Group信息",
-                "operationId": "74043c4b-7d70-44f7-a21d-12ded9f88d9f"
-            }
-        },
-        "/swagger": {
-            "get": {
-                "tags": [
-                    "swagger"
-                ],
-                "operationId": "17247960-fccd-45d5-8e62-665990926084"
-            }
-        },
         "/user": {
             "get": {
                 "tags": [
                     "用户相关"
                 ],
                 "summary": "获取所有用户信息",
-                "operationId": "845f975c-9bcf-4cbe-ab18-3ec2febb264e",
+                "operationId": "df14c67a-861b-48c0-9f4f-2347f351bf69",
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "用户ID3",
-                        "required": true
+                        "name": "page",
+                        "in": "query",
+                        "description": "页码"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "每页显示条数"
                     },
                     {
                         "name": "name",
-                        "in": "path",
-                        "description": "姓名",
-                        "required": true
-                    },
-                    {
-                        "name": "test1",
                         "in": "query",
-                        "description": "他1"
-                    },
-                    {
-                        "name": "test2",
-                        "in": "query",
-                        "description": "他2"
+                        "description": "姓名"
                     }
                 ],
                 "responses": {
@@ -344,11 +47,8 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/userResponse",
-                                        "type": "object"
-                                    }
+                                    "$ref": "#/components/schemas/UserListResponse",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -360,15 +60,12 @@
                     "用户相关"
                 ],
                 "summary": "添加用户信息",
-                "operationId": "302ccc7a-08ab-4e91-81bb-7027fc32e6bc",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/userResponse",
-                                    "type": "object"
-                                }
+                "operationId": "413bc5cb-5edf-477c-b472-618fb20084f6",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddUserRequest"
                             }
                         }
                     }
@@ -381,29 +78,12 @@
                     "用户相关"
                 ],
                 "summary": "获取用户信息",
-                "operationId": "647daeed-c7c3-42a1-8b63-ca1512702aea",
+                "operationId": "2fcdee2c-77e1-4582-8add-8724b6401aac",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "用户ID3",
                         "required": true
-                    },
-                    {
-                        "name": "name",
-                        "in": "path",
-                        "description": "姓名",
-                        "required": true
-                    },
-                    {
-                        "name": "test1",
-                        "in": "query",
-                        "description": "他1"
-                    },
-                    {
-                        "name": "test2",
-                        "in": "query",
-                        "description": "他2"
                     }
                 ],
                 "responses": {
@@ -411,10 +91,8 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "$ref": "#/components/schemas/UserList",
+                                    "type": "object"
                                 }
                             }
                         }
@@ -426,53 +104,83 @@
                     "用户相关"
                 ],
                 "summary": "编辑用户信息",
-                "operationId": "3ed86892-5983-4430-ac5f-3d996dc52c35",
+                "operationId": "76238166-a051-4c13-83e7-9c441cb9be8e",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "用户ID3",
-                        "required": true
-                    },
-                    {
-                        "name": "name",
-                        "in": "path",
-                        "description": "姓名",
                         "required": true
                     }
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/userRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/userResponse",
-                                    "type": "object"
-                                }
+                                "$ref": "#/components/schemas/EditUserRequest"
                             }
                         }
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "删除用户信息",
+                "operationId": "ff53c1a2-3352-4fc4-98fd-2e57bb4564d6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ]
             }
         }
     },
     "components": {
         "schemas": {
-            "bookRequest": {
+            "AddUserRequest": {
                 "type": "object",
-                "title": "bookRequest",
+                "title": "AddUserRequest",
                 "properties": {
-                    "age": {
-                        "description": "年龄",
+                    "name": {
+                        "description": "姓名",
+                        "type": "string"
+                    }
+                }
+            },
+            "EditUserRequest": {
+                "type": "object",
+                "title": "EditUserRequest",
+                "properties": {
+                    "name": {
+                        "description": "姓名",
+                        "type": "string"
+                    }
+                }
+            },
+            "PageListRequest": {
+                "type": "object",
+                "title": "PageListRequest",
+                "properties": {
+                    "page": {
+                        "description": "页码",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "description": "每页显示条数",
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "UserList": {
+                "type": "object",
+                "title": "UserList",
+                "properties": {
+                    "id": {
                         "type": "integer",
                         "format": "int32"
                     },
@@ -482,85 +190,38 @@
                     }
                 }
             },
-            "bookResponse": {
+            "UserListRequest": {
                 "type": "object",
-                "title": "bookResponse",
+                "title": "UserListRequest",
                 "properties": {
-                    "code": {
-                        "description": "业务码",
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "msg": {
-                        "description": "业务消息",
-                        "type": "string"
-                    }
-                }
-            },
-            "cartRequest": {
-                "type": "object",
-                "title": "cartRequest",
-                "properties": {
-                    "age": {
-                        "description": "年龄",
-                        "type": "integer",
-                        "format": "int32"
-                    },
                     "name": {
                         "description": "姓名",
                         "type": "string"
-                    }
-                }
-            },
-            "cartResponse": {
-                "type": "object",
-                "title": "cartResponse",
-                "properties": {
-                    "age": {
-                        "description": "年龄",
+                    },
+                    "page": {
+                        "description": "页码",
                         "type": "integer",
                         "format": "int32"
                     },
-                    "name": {
-                        "description": "姓名",
-                        "type": "string"
+                    "pageSize": {
+                        "description": "每页显示条数",
+                        "type": "integer",
+                        "format": "int32"
                     }
                 }
             },
-            "userRequest": {
+            "UserListResponse": {
                 "type": "object",
-                "title": "userRequest",
+                "title": "UserListResponse",
                 "properties": {
-                    "test1": {
-                        "description": "他1",
-                        "type": "string"
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UserList"
+                        }
                     },
-                    "test2": {
-                        "description": "他2",
-                        "type": "string"
-                    }
-                }
-            },
-            "userRequest2": {
-                "type": "object",
-                "title": "userRequest2",
-                "properties": {
-                    "test1": {
-                        "description": "他1",
-                        "type": "string"
-                    },
-                    "test2": {
-                        "description": "他2",
-                        "type": "string"
-                    }
-                }
-            },
-            "userResponse": {
-                "type": "object",
-                "title": "userResponse",
-                "properties": {
-                    "code": {
-                        "description": "姓名t32est",
+                    "total": {
+                        "description": "总条数",
                         "type": "integer",
                         "format": "int32"
                     }

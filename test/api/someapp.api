@@ -2,13 +2,10 @@ syntax = "v1"
 
 info(
 	title: "some app"
-	version: "1.0.1"
+	baseapi: ""
 )
 
 import (
+	"common.api"
 	"v1/user.api"
-	"v1/book.api"
-	"v1/swagger.api"
-	"v1/cart.api"
-	"v1/no_group.api"
 )
