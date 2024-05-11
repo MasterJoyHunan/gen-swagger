@@ -6,8 +6,11 @@ import (
 )
 
 func GenSecurity(openapi *types.OpenAPIJson) error {
-	openapi.Security = make(map[string][]string)
-	openapi.Security["apiKey"] = []string{}
+	openapi.Security = []map[string][]string{
+		{
+			"apiKey": []string{},
+		},
+	}
 
 	openapi.Components.SecuritySchemes = make(map[string]*types.Security)
 	openapi.Components.SecuritySchemes["apiKey"] = &types.Security{

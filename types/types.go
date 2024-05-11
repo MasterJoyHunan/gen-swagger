@@ -4,13 +4,13 @@ package types
 // https://openapi.apifox.cn/
 
 type OpenAPIJson struct {
-	Openapi    string               `json:"openapi,omitempty"`
-	Servers    []*Servers           `json:"servers,omitempty"`
-	Info       *Info                `json:"info,omitempty"`
-	Tags       []*Tag               `json:"tags,omitempty"`
-	Security   map[string][]string  `json:"security"`
-	Paths      map[string]*PathItem `json:"paths,omitempty"`
-	Components *Components          `json:"components,omitempty"`
+	Openapi    string                `json:"openapi,omitempty"`
+	Servers    []*Servers            `json:"servers,omitempty"`
+	Info       *Info                 `json:"info,omitempty"`
+	Tags       []*Tag                `json:"tags,omitempty"`
+	Security   []map[string][]string `json:"security"`
+	Paths      map[string]*PathItem  `json:"paths,omitempty"`
+	Components *Components           `json:"components,omitempty"`
 }
 
 type Info struct {
