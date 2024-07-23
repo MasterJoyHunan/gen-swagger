@@ -16,7 +16,7 @@ go get -u github.com/MasterJoyHunan/gen-swagger
 
 go 1.16 及以上使用
 ```sh
-go install github.com/MasterJoyHunan/gen-swagger@v1.0.4
+go install github.com/MasterJoyHunan/gen-swagger@v1.0.5
 ```
 
 #### 在项目下定义 you-app.api 文件

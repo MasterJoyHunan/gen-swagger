@@ -150,7 +150,7 @@ func parseRequestBody(r spec.Route) *types.RequestBody {
 		if member.IsFormMember() {
 			// 支持文件 FileRequest { File string `form:"file" file:"image/png, image/jpeg"` }
 
-			if isFileMember(member) {
+			if hasFileMember(members) {
 				content["multipart/form-data"] = &types.MediaType{
 					Schema: &types.Schema{
 						Ref: "#/components/schemas/" + r.RequestType.Name(),
@@ -272,6 +272,15 @@ func getTagComment(m spec.Member) string {
 func isFileMember(m spec.Member) bool {
 	for _, tag := range m.Tags() {
 		if tag.Key == "file" {
+			return true
+		}
+	}
+	return false
+}
+
+func hasFileMember(m []spec.Member) bool {
+	for _, member := range m {
+		if isFileMember(member) {
 			return true
 		}
 	}
