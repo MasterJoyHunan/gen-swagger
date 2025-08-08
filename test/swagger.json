@@ -14,9 +14,11 @@
             "name": "用户相关"
         }
     ],
-    "security": {
-        "apiKey": []
-    },
+    "security": [
+        {
+            "apiKey": []
+        }
+    ],
     "paths": {
         "/v1/complex1": {
             "get": {
@@ -24,7 +26,7 @@
                     "用户相关"
                 ],
                 "summary": "复杂嵌套请求",
-                "operationId": "5532b6a9-5c5e-44fe-a48b-91887ae330fe",
+                "operationId": "24c9df0e-a881-43dd-874d-6c6ddb9cbb92",
                 "parameters": [
                     {
                         "name": "id",
@@ -59,7 +61,7 @@
                     "用户相关"
                 ],
                 "summary": "复杂嵌套请求",
-                "operationId": "fb39eae1-89fa-486d-881d-3f75902711e3",
+                "operationId": "6233491b-ff44-41cf-8b78-383ed5d08105",
                 "parameters": [
                     {
                         "name": "id",
@@ -99,7 +101,7 @@
                     "用户相关"
                 ],
                 "summary": "文件上传",
-                "operationId": "d4ba679a-8ace-4e42-8005-add101017839",
+                "operationId": "1eb7c6d6-86c6-400c-a885-1b1656cb45c2",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -117,7 +119,7 @@
                     "用户相关"
                 ],
                 "summary": "获取所有用户信息",
-                "operationId": "34286023-cd53-4635-ab3a-6488b3db1d1a",
+                "operationId": "d59eb220-3a8c-4246-9e44-026c49c60e46",
                 "parameters": [
                     {
                         "name": "page",
@@ -153,7 +155,7 @@
                     "用户相关"
                 ],
                 "summary": "添加用户信息",
-                "operationId": "e25ee7a1-64f0-43da-a0f3-04e801516528",
+                "operationId": "4e15b45b-93e2-432c-a2e3-baa4e8eda3e5",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -171,7 +173,7 @@
                     "用户相关"
                 ],
                 "summary": "获取用户信息",
-                "operationId": "547e559f-bf02-4585-acf8-add7156da43d",
+                "operationId": "732228b0-d4d1-4f74-90e0-059cb4c9238c",
                 "parameters": [
                     {
                         "name": "id",
@@ -197,7 +199,7 @@
                     "用户相关"
                 ],
                 "summary": "编辑用户信息",
-                "operationId": "4fb0c230-9e5a-4fa1-a624-961fc088e6af",
+                "operationId": "e499f337-61f9-458f-a471-c5753a9dd801",
                 "parameters": [
                     {
                         "name": "id",
@@ -220,7 +222,7 @@
                     "用户相关"
                 ],
                 "summary": "删除用户信息",
-                "operationId": "1ace6eb4-c184-458c-b43d-381502ef7fe7",
+                "operationId": "ff3ec25a-ad11-42ff-92d6-291c532f9198",
                 "parameters": [
                     {
                         "name": "id",

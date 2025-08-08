@@ -1,6 +1,8 @@
 package generator
 
 import (
+	"encoding/json"
+	"log"
 	"net/http"
 	"regexp"
 	"strings"
@@ -191,11 +193,37 @@ func parseResponses(r spec.Route) map[string]*types.Response {
 		return nil
 	}
 
+	if len(prepare.WarpJson) == 0 {
+		return map[string]*types.Response{
+			"200": {
+				Content: map[string]*types.MediaType{
+					"application/json": {
+						Schema: parseResponse(r.ResponseType),
+					},
+				},
+			},
+		}
+	}
+
+	properties := map[string]*types.Schema{}
+	err := json.Unmarshal([]byte(prepare.WarpJson), &properties)
+	if err != nil {
+		log.Println("解析 warpJson 错误")
+	}
+
+	for i, schema := range properties {
+		if schema.Ref == "{data}" {
+			properties[i] = parseResponse(r.ResponseType)
+		}
+	}
+
 	return map[string]*types.Response{
 		"200": {
 			Content: map[string]*types.MediaType{
 				"application/json": {
-					Schema: parseResponse(r.ResponseType),
+					Schema: &types.Schema{
+						Properties: properties,
+					},
 				},
 			},
 		},

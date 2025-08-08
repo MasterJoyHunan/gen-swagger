@@ -14,6 +14,7 @@ var (
 	LocalApi     string
 	DevApi       string
 	ProdApi      string
+	WarpJson     string
 )
 
 func Setup() {
