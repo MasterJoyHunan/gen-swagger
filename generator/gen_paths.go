@@ -190,7 +190,11 @@ func parseRequestBody(r spec.Route) *types.RequestBody {
 }
 
 func parseResponses(r spec.Route) map[string]*types.Response {
-	if len(prepare.WarpJson) == 0 {
+	if len(prepare.ApiSpec.Info.Properties["wrap_json"]) > 0 {
+		prepare.WrapJson = strings.Trim(prepare.ApiSpec.Info.Properties["wrap_json"], "\"")
+	}
+
+	if len(prepare.WrapJson) == 0 {
 		// 未设置包裹 && 无返回
 		if r.ResponseType == nil {
 			return nil
@@ -211,7 +215,7 @@ func parseResponses(r spec.Route) map[string]*types.Response {
 	properties := map[string]*types.Schema{}
 
 	// 解析包裹
-	warpJson := prepare.WarpJson
+	warpJson := prepare.WrapJson
 	decodeString, err := base64.StdEncoding.DecodeString(warpJson)
 	if err == nil {
 		warpJson = string(decodeString)

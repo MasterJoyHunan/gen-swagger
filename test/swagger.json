@@ -26,7 +26,7 @@
                     "用户相关"
                 ],
                 "summary": "复杂嵌套请求",
-                "operationId": "bff85c50-6a17-4d49-b06f-d539077e21d7",
+                "operationId": "ff0de37e-5042-4a41-a158-38134d8748de",
                 "parameters": [
                     {
                         "name": "id",
@@ -43,10 +43,22 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/ComplexResponse",
-                                        "type": "object"
+                                    "properties": {
+                                        "code": {
+                                            "description": "返回码\u003cbr\u003e0：正常\u003cbr\u003e非0：错误\u003cbr\u003e具体错误查看 message",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ComplexResponse",
+                                                "type": "object"
+                                            }
+                                        },
+                                        "message": {
+                                            "description": "code != 0 返回错误信息",
+                                            "type": "string"
+                                        }
                                     }
                                 }
                             }
@@ -61,7 +73,7 @@
                     "用户相关"
                 ],
                 "summary": "复杂嵌套请求",
-                "operationId": "35e4a814-f1b1-46b9-be89-80a1929fdff2",
+                "operationId": "2637b3dd-b395-41fc-85b5-7c48f7aa9d19",
                 "parameters": [
                     {
                         "name": "id",
@@ -83,10 +95,22 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/ComplexResponse",
-                                        "type": "object"
+                                    "properties": {
+                                        "code": {
+                                            "description": "返回码\u003cbr\u003e0：正常\u003cbr\u003e非0：错误\u003cbr\u003e具体错误查看 message",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ComplexResponse",
+                                                "type": "object"
+                                            }
+                                        },
+                                        "message": {
+                                            "description": "code != 0 返回错误信息",
+                                            "type": "string"
+                                        }
                                     }
                                 }
                             }
@@ -101,12 +125,35 @@
                     "用户相关"
                 ],
                 "summary": "文件上传",
-                "operationId": "092a1d2d-827f-4722-b0df-9c410721c2e0",
+                "operationId": "d1243eb7-1e3c-4577-9bce-ede14d234482",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/FileRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "返回码\u003cbr\u003e0：正常\u003cbr\u003e非0：错误\u003cbr\u003e具体错误查看 message",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        },
+                                        "message": {
+                                            "description": "code != 0 返回错误信息",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -119,7 +166,7 @@
                     "用户相关"
                 ],
                 "summary": "获取所有用户信息",
-                "operationId": "4577efee-dd0b-4e3c-b686-5e103a9da480",
+                "operationId": "164efba0-b702-40c6-9832-7b06adbe4480",
                 "parameters": [
                     {
                         "name": "page",
@@ -142,8 +189,20 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UserListResponse",
-                                    "type": "object"
+                                    "properties": {
+                                        "code": {
+                                            "description": "返回码\u003cbr\u003e0：正常\u003cbr\u003e非0：错误\u003cbr\u003e具体错误查看 message",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserListResponse",
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "description": "code != 0 返回错误信息",
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -155,12 +214,35 @@
                     "用户相关"
                 ],
                 "summary": "添加用户信息",
-                "operationId": "77faf9a2-cfa2-4228-8e57-9713a6f64cac",
+                "operationId": "b1848a8f-6d3b-43d1-8a2d-366fa20432a1",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/AddUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "返回码\u003cbr\u003e0：正常\u003cbr\u003e非0：错误\u003cbr\u003e具体错误查看 message",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        },
+                                        "message": {
+                                            "description": "code != 0 返回错误信息",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -173,7 +255,7 @@
                     "用户相关"
                 ],
                 "summary": "获取用户信息",
-                "operationId": "a68d077c-4649-4b38-8a98-c3e9fa47cdcc",
+                "operationId": "f7cd85f4-dd26-47e1-9bd1-4071b939a880",
                 "parameters": [
                     {
                         "name": "id",
@@ -186,8 +268,20 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UserList",
-                                    "type": "object"
+                                    "properties": {
+                                        "code": {
+                                            "description": "返回码\u003cbr\u003e0：正常\u003cbr\u003e非0：错误\u003cbr\u003e具体错误查看 message",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserList",
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "description": "code != 0 返回错误信息",
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -199,7 +293,7 @@
                     "用户相关"
                 ],
                 "summary": "编辑用户信息",
-                "operationId": "1317466c-f505-4c2f-bad4-73c2d3ff783b",
+                "operationId": "754bf5bc-e8f7-45b4-8193-ed4c0b7bade9",
                 "parameters": [
                     {
                         "name": "id",
@@ -215,6 +309,29 @@
                             }
                         }
                     }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "返回码\u003cbr\u003e0：正常\u003cbr\u003e非0：错误\u003cbr\u003e具体错误查看 message",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        },
+                                        "message": {
+                                            "description": "code != 0 返回错误信息",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             },
             "delete": {
@@ -222,14 +339,37 @@
                     "用户相关"
                 ],
                 "summary": "删除用户信息",
-                "operationId": "bf24ef41-12f5-4b27-aad8-05af4ef1312c",
+                "operationId": "a4851057-c691-4f69-8367-59d340acd145",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "required": true
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "返回码\u003cbr\u003e0：正常\u003cbr\u003e非0：错误\u003cbr\u003e具体错误查看 message",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        },
+                                        "message": {
+                                            "description": "code != 0 返回错误信息",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },

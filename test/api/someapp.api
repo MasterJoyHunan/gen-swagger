@@ -3,6 +3,7 @@ syntax = "v1"
 info(
 	title: "some app"
 	baseapi: ""
+	wrap_json: "eyJjb2RlIjp7ImRlc2NyaXB0aW9uIjoi6L+U5Zue56CBXHUwMDNjYnJcdTAwM2Uw77ya5q2j5bi4XHUwMDNjYnJcdTAwM2XpnZ4w77ya6ZSZ6K+vXHUwMDNjYnJcdTAwM2XlhbfkvZPplJnor6/mn6XnnIsgbWVzc2FnZSIsInR5cGUiOiJpbnRlZ2VyIn0sImRhdGEiOnsiJHJlZiI6IntkYXRhfSJ9LCJtZXNzYWdlIjp7ImRlc2NyaXB0aW9uIjoiY29kZSAhPSAwIOi/lOWbnumUmeivr+S/oeaBryIsInR5cGUiOiJzdHJpbmcifX0="
 )
 
 import (

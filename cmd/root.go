@@ -34,7 +34,7 @@ func init() {
 	rootCmd.Flags().StringVar(&prepare.LocalApi, "local_api", "127.0.0.1:8888", "本地环境请求地址")
 	rootCmd.Flags().StringVar(&prepare.DevApi, "dev_api", "", "测试环境请求地址")
 	rootCmd.Flags().StringVar(&prepare.ProdApi, "prod_api", "", "生产环境请求地址")
-	rootCmd.Flags().StringVar(&prepare.WarpJson, "warp_json", "", "返回包裹")
+	rootCmd.Flags().StringVar(&prepare.WrapJson, "wrap_json", "", "返回包裹")
 }
 
 func GenSwaggerCode(cmd *cobra.Command, args []string) error {
