@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -189,11 +190,13 @@ func parseRequestBody(r spec.Route) *types.RequestBody {
 }
 
 func parseResponses(r spec.Route) map[string]*types.Response {
-	if r.ResponseType == nil {
-		return nil
-	}
-
 	if len(prepare.WarpJson) == 0 {
+		// 未设置包裹 && 无返回
+		if r.ResponseType == nil {
+			return nil
+		}
+
+		// 未设置包裹 && 有返回
 		return map[string]*types.Response{
 			"200": {
 				Content: map[string]*types.MediaType{
@@ -206,13 +209,26 @@ func parseResponses(r spec.Route) map[string]*types.Response {
 	}
 
 	properties := map[string]*types.Schema{}
-	err := json.Unmarshal([]byte(prepare.WarpJson), &properties)
+
+	// 解析包裹
+	warpJson := prepare.WarpJson
+	decodeString, err := base64.StdEncoding.DecodeString(warpJson)
+	if err == nil {
+		warpJson = string(decodeString)
+	}
+	err = json.Unmarshal([]byte(warpJson), &properties)
 	if err != nil {
-		log.Println("解析 warpJson 错误")
+		log.Println("解析 warpJson 错误" + warpJson)
 	}
 
 	for i, schema := range properties {
 		if schema.Ref == "{data}" {
+			if r.ResponseType == nil {
+				properties[i] = &types.Schema{
+					Type: "null",
+				}
+				continue
+			}
 			properties[i] = parseResponse(r.ResponseType)
 		}
 	}

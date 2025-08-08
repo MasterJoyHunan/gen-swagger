@@ -16,7 +16,7 @@ go get -u github.com/MasterJoyHunan/gen-swagger
 
 go 1.16 及以上使用
 ```sh
-go install github.com/MasterJoyHunan/gen-swagger@v1.0.5
+go install github.com/MasterJoyHunan/gen-swagger@v1.0.7
 ```
 
 #### 在项目下定义 you-app.api 文件
@@ -82,6 +82,7 @@ gen-swagger --local_api=http://127.0.0.1:8888 --file=asset/swagger/swagger.json 
 * --local_api 本地环境请求地址 | 默认:http://127.0.0.1:8888
 * --dev_api 测试环境请求地址
 * --prod_api 生产环境请求地址
+* --warp_json 返回包裹 比如所有接口想通用返回数据`{"code":0,"data":"具体数据","msg":"success"}`，需要设置为 `{"code":{"description":"返回码","type":"integer"},"data":{"$ref":"{data}"},"msg":{"description":"错误信息","type":"string"}}` 最好将json字符串转为base64,再传值 
 
 #### 准备前端页面 swagger.html
 
