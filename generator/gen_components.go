@@ -51,6 +51,9 @@ func joinComponents(openapi *types.OpenAPIJson, t spec.Type) {
 
 		// 剩下的才能成为 components
 		key, value := makeProperties(member)
+		if lo.Contains([]string{"-", "_", ""}, key) {
+			continue
+		}
 		schema.Properties[key] = value
 	}
 	if len(schema.Properties) != 0 {
