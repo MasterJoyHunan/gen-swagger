@@ -71,7 +71,7 @@ service someapp {
 #### 生成 swagger.json 文件
 
 ```sh
-gen-swagger --local_api=http://127.0.0.1:8888 --file=asset/swagger/swagger.json broadband-management-api.api
+gen-swagger --local_api=http://127.0.0.1:8888 --file=asset/swagger/swagger.json someapp-api.api
 ```
 
 参数说明
@@ -84,7 +84,7 @@ gen-swagger --local_api=http://127.0.0.1:8888 --file=asset/swagger/swagger.json 
 * --prod_api 生产环境请求地址
 * --wrap_json 返回包裹 比如所有接口想通用返回数据`{"code":0,"data":"具体数据","msg":"success"}`，需要设置为 `{"code":{"description":"返回码","type":"integer"},"data":{"$ref":"{data}"},"msg":{"description":"错误信息","type":"string"}}` 最好将json字符串转为base64,再传值 
 
-#### 准备前端页面 swagger.html
+#### 准备前端页面 asset/swagger/index.html
 
 ```html
 <!-- HTML for static distribution bundle build -->
@@ -157,34 +157,17 @@ gen-swagger --local_api=http://127.0.0.1:8888 --file=asset/swagger/swagger.json 
 package main
 
 import (
-	"bytes"
-	_ "embed"
-	"text/template"
 	"github.com/gin-gonic/gin"
 )
-
-//go:embed swagger.html
-var swaggerHtml string
 
 // Setup 生成 swagger 格式的文档
 func main() {
     c := gin.New()
-    c.GET("/swagger", func(ctx *gin.Context) {
-        ctx.Header("Content-Type", "text/html; charset=utf-8")
-        tpl := template.Must(template.New("doc").Parse(swaggerHtml))
-        buf := bytes.NewBuffer(nil)
-        tpl.Execute(buf, map[string]string{
-            "Title":   "接口使用文档",
-            "SpecURL": "/swaggerfs/swagger.json",
-        })
-        ctx.Writer.Write(buf.Bytes())
-    })
-
-    c.Static("/swaggerfs", "asset/swagger")
+	c.Static("/swagger", "asset/swagger")
     c.Run(":80")
 }
 ```
 
 ### 最终效果
 
-![image-20240509171735559](http://tc.masterjoy.top/typory/image-20240509171735559.png)
+![image-20240509171735559](https://tc.masterjoy.top/typory/image-20240509171735559.png)
