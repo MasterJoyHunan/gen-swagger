@@ -1,10 +1,7 @@
 package test
 
 import (
-	"bytes"
-	_ "embed"
 	"encoding/json"
-	"html/template"
 	"os"
 	"testing"
 
@@ -13,9 +10,6 @@ import (
 	"github.com/MasterJoyHunan/gen-swagger/types"
 	"github.com/gin-gonic/gin"
 )
-
-//go:embed swagger.html
-var swaggerHtml string
 
 func TestGenSwagger(t *testing.T) {
 	prepare.OutputFile = "example"
@@ -39,17 +33,6 @@ func TestGenSwagger(t *testing.T) {
 
 func TestSwaggerUi(t *testing.T) {
 	e := gin.New()
-	e.GET("/", func(ctx *gin.Context) {
-		ctx.Header("Content-Type", "text/html; charset=utf-8")
-		tpl := template.Must(template.New("doc").Parse(swaggerHtml))
-		buf := bytes.NewBuffer(nil)
-		tpl.Execute(buf, map[string]string{
-			"Title":   "后台管理系统",
-			"SpecURL": "/swaggerfs/swagger.json",
-		})
-		ctx.Writer.Write(buf.Bytes())
-	})
-
-	e.Static("/swaggerfs", "./")
+	e.Static("/", "./")
 	e.Run(":80")
 }

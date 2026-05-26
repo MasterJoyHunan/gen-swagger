@@ -92,7 +92,7 @@ gen-swagger --local_api=http://127.0.0.1:8888 --file=asset/swagger/swagger.json 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ .Title }}</title>
+    <title>接口文档</title>
     <link rel="stylesheet" type="text/css" href="https://petstore.swagger.io/swagger-ui.css" >
     <link rel="icon" type="image/png" href="https://petstore.swagger.io/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="https://petstore.swagger.io/favicon-16x16.png" sizes="16x16" />
@@ -137,7 +137,7 @@ gen-swagger --local_api=http://127.0.0.1:8888 --file=asset/swagger/swagger.json 
             defaultModelsExpandDepth: -1,
             defaultModelExpandDepth: 5,
             validatorUrl: null,
-            url: "{{ .SpecURL }}",
+            url: "./swagger.json",
         })
         // End Swagger UI call region
         window.ui = ui
